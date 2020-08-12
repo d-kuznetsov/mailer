@@ -15,9 +15,8 @@ export default {
    */
   env: {
     MAIL_API_URL:
-      (process.env.NODE_ENV === 'production'
-        ? process.env.URL // 'https://simple-contact-form.netlify.app/'
-        : 'http://localhost:8888/') + '.netlify/functions/send-mail',
+      (process.env.URL || 'http://localhost:8888') +
+      '/.netlify/functions/send-mail',
   },
   head: {
     title: process.env.npm_package_name || '',
