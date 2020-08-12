@@ -55,7 +55,7 @@ export default {
       const { name, email, message } = this
       this.$axios
         // .post('http://localhost:8888/.netlify/functions/send-mail', {
-        .post('/.netlify/functions/send-mail', {
+        .post(`${location.href}.netlify/functions/send-mail`, {
           name,
           email,
           message,
