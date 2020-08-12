@@ -13,6 +13,12 @@ export default {
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
    */
+  env: {
+    MAIL_API_URL:
+      process.env.NODE_ENV === 'production'
+        ? 'https://simple-contact-form.netlify.app/'
+        : 'http://localhost:8888/' + '.netlify/functions/send-mail',
+  },
   head: {
     title: process.env.npm_package_name || '',
     meta: [

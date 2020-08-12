@@ -51,11 +51,9 @@ export default {
   },
   methods: {
     submit() {
-      console.log('Submit')
       const { name, email, message } = this
       this.$axios
-        // .post('http://localhost:8888/.netlify/functions/send-mail', {
-        .post(`${location.href}.netlify/functions/send-mail`, {
+        .post(process.env.MAIL_API_URL, {
           name,
           email,
           message,
@@ -63,8 +61,8 @@ export default {
         .then((response) => {
           console.log(response.data)
         })
-        .catch(() => {
-          console.log('ERROR')
+        .catch((err) => {
+          console.log(err)
         })
     },
   },
