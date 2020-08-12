@@ -52,6 +52,20 @@ export default {
   methods: {
     submit() {
       console.log('Submit')
+      const { name, email, message } = this
+      this.$axios
+        // .post('http://localhost:8888/.netlify/functions/send-mail', {
+        .post('/.netlify/functions/send-mail', {
+          name,
+          email,
+          message,
+        })
+        .then((response) => {
+          console.log(response.data)
+        })
+        .catch(() => {
+          console.log('ERROR')
+        })
     },
   },
 }
