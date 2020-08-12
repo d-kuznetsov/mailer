@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    Mailer
+    <contact-form />
   </div>
 </template>
 
@@ -21,5 +21,6 @@ export default {}
   justify-content: center;
   align-items: center;
   text-align: center;
+  flex-direction: column;
 }
 </style>
