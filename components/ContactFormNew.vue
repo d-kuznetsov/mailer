@@ -4,8 +4,7 @@
       :class="{ 'form-error': submitStatus === 'INPUT_ERROR' }"
       name="contact"
       data-netlify="true"
-      netlify-honeypot="bot-field"
-      @submit="submit"
+      @submit.prevent="submit"
     >
       <div class="mb-4">
         <input
