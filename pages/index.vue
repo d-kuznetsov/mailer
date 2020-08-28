@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <contact-form-new />
+    <contact-form />
   </div>
 </template>
 
