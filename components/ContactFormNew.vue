@@ -6,7 +6,7 @@
       data-netlify="true"
       netlify-honeypot="bot-field"
       data-netlify-recaptcha="true"
-      @submit.prevent="submit"
+      @submit="submit"
     >
       <div class="mb-4">
         <input
@@ -98,7 +98,8 @@ export default {
         )
         .join('&')
     },
-    submit() {
+    submit(e) {
+      e.preventDefault()
       this.$v.$touch()
       if (this.$v.$invalid) {
         this.submitStatus = 'INPUT_ERROR'
