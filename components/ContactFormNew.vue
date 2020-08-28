@@ -3,7 +3,6 @@
     <form
       :class="{ 'form-error': submitStatus === 'INPUT_ERROR' }"
       name="contact"
-      method="POST"
       data-netlify="true"
       netlify-honeypot="bot-field"
       data-netlify-recaptcha="true"
@@ -92,6 +91,13 @@ export default {
     }
   },
   methods: {
+    encode(data) {
+      return Object.keys(data)
+        .map(
+          (key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
+        )
+        .join('&')
+    },
     submit() {
       this.$v.$touch()
       if (this.$v.$invalid) {
@@ -101,12 +107,19 @@ export default {
 
         this.submitStatus = 'PENDING'
         this.$axios
-          .post(/* process.env.MAIL_API_URL */ '/', {
-            name,
-            email,
-            subject,
-            message,
-          })
+          .post(
+            /* process.env.MAIL_API_URL */ '/',
+            this.encode({
+              'form-name': 'contact',
+              name,
+              email,
+              subject,
+              message,
+            }),
+            {
+              header: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            }
+          )
           .then(() => {
             this.submitStatus = 'SUCCES'
             setTimeout(() => {
