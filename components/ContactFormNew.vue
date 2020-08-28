@@ -2,8 +2,6 @@
   <section>
     <form
       :class="{ 'form-error': submitStatus === 'INPUT_ERROR' }"
-      name="contact"
-      data-netlify="true"
       @submit.prevent="submit"
     >
       <div class="mb-4">
@@ -58,7 +56,6 @@
           placeholder="Message (from 10 characters):"
         ></textarea>
       </div>
-      <input name="bot-field" class="hidden" />
       <div>
         <button
           class="hover:bg-blue-700 focus:outline-none focus:shadow-outline px-4 py-2 font-bold text-white bg-blue-500 rounded"
@@ -88,15 +85,7 @@ export default {
     }
   },
   methods: {
-    encode(data) {
-      return Object.keys(data)
-        .map(
-          (key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
-        )
-        .join('&')
-    },
-    submit(e) {
-      e.preventDefault()
+    submit() {
       this.$v.$touch()
       if (this.$v.$invalid) {
         this.submitStatus = 'INPUT_ERROR'
@@ -105,26 +94,18 @@ export default {
 
         this.submitStatus = 'PENDING'
         this.$axios
-          .post(
-            /* process.env.MAIL_API_URL */ '/',
-            this.encode({
-              'form-name': 'contact',
-              name,
-              email,
-              subject,
-              message,
-            }),
-            {
-              header: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            }
-          )
+          .post(process.env.MAIL_API_URL, {
+            name,
+            email,
+            subject,
+            message,
+          })
           .then(() => {
             this.submitStatus = 'SUCCES'
             setTimeout(() => {
               this.submitStatus = null
               this.clean()
             }, 5000)
-            alert('SUCCES')
           })
           .catch(() => {
             this.submitStatus = 'SERVER_ERROR'
