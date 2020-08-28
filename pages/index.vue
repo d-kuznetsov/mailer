@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <contact-form />
+    <contact-form-new />
   </div>
 </template>
 
@@ -21,6 +22,5 @@ export default {}
   justify-content: center;
   align-items: center;
   text-align: center;
-  flex-direction: column;
 }
 </style>

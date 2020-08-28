@@ -2,7 +2,11 @@
   <section>
     <form
       :class="{ 'form-error': submitStatus === 'INPUT_ERROR' }"
-      @submit.prevent="submit"
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      data-netlify-recaptcha="true"
     >
       <div class="mb-4">
         <input
@@ -56,6 +60,8 @@
           placeholder="Message (from 10 characters):"
         ></textarea>
       </div>
+      <input name="bot-field" class="hidden" />
+      <div data-netlify-recaptcha="true"></div>
       <div>
         <button
           class="hover:bg-blue-700 focus:outline-none focus:shadow-outline px-4 py-2 font-bold text-white bg-blue-500 rounded"
