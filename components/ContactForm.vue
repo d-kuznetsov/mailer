@@ -2,6 +2,7 @@
   <section>
     <form
       :class="{ 'form-error': submitStatus === 'INPUT_ERROR' }"
+      data-netlify-recaptcha="true"
       @submit.prevent="submit"
     >
       <div class="mb-4">
@@ -56,6 +57,7 @@
           placeholder="Message (from 10 characters):"
         ></textarea>
       </div>
+      <div data-netlify-recaptcha="true"></div>
       <div>
         <button
           class="hover:bg-blue-700 focus:outline-none focus:shadow-outline px-4 py-2 font-bold text-white bg-blue-500 rounded"
