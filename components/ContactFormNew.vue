@@ -7,6 +7,7 @@
       data-netlify="true"
       netlify-honeypot="bot-field"
       data-netlify-recaptcha="true"
+      @submit.prevent="submit"
     >
       <div class="mb-4">
         <input
@@ -100,7 +101,7 @@ export default {
 
         this.submitStatus = 'PENDING'
         this.$axios
-          .post(process.env.MAIL_API_URL, {
+          .post(/* process.env.MAIL_API_URL */ '/', {
             name,
             email,
             subject,
@@ -112,6 +113,7 @@ export default {
               this.submitStatus = null
               this.clean()
             }, 5000)
+            alert('SUCCES')
           })
           .catch(() => {
             this.submitStatus = 'SERVER_ERROR'
