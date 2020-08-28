@@ -2,6 +2,7 @@
   <section>
     <form
       :class="{ 'form-error': submitStatus === 'INPUT_ERROR' }"
+      data-netlify="true"
       @submit.prevent="submit"
     >
       <div class="mb-4">
